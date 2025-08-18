@@ -1,20 +1,20 @@
 package org.example.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Transactions {
-    private  int id;
+    private int id;
     private int account_id;
     private String type;
     private double amount;
-    private Timestamp createdAd;
+    private Timestamp createdAt;
 
-    public Transactions(int id, int account_id, String type, double amount, Timestamp createdAd) {
+    public Transactions(int id, int account_id, String type, double amount, Timestamp createdAt) {
         this.id = id;
         this.account_id = account_id;
         this.type = type;
         this.amount = amount;
-        this.createdAd = createdAd;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -49,11 +49,11 @@ public class Transactions {
         this.amount = amount;
     }
 
-    public Timestamp getCreatedAd() {
-        return createdAd;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedAd(Timestamp createdAd) {
-        this.createdAd = createdAd;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }

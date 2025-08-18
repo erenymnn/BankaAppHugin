@@ -3,9 +3,9 @@ package org.example.model;
 public class Users {
     private int id;
     private String username;
-    private int password;
+    private String password;
 
-    public Users(int id, String username, int password) {
+    public Users(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -27,11 +27,11 @@ public class Users {
         this.username = username;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
