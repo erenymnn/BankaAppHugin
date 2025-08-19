@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.controller.BankController;
-import org.example.model.Transactions;
 import org.example.model.Users;
 import org.example.repository.AccountsRepository;
 import org.example.repository.TransactionsRepository;
@@ -48,6 +47,8 @@ public class Main {
 
             int secim = Integer.parseInt(scanner.nextLine());
 
+
+
             switch (secim) {
                 case 1:
                     System.out.print("Kullanici adi: ");
@@ -64,18 +65,29 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Yeni kullanici adi: "); // burayı düzelt sınır koy şifreye filan
-                    String newUsername = scanner.nextLine(); // postman bağla
+                    System.out.print("Yeni kullanici adi: ");
+                    String newUsername = scanner.nextLine();
                     System.out.print("Yeni sifre: ");
                     String newPassword = scanner.nextLine();
+
                     boolean created = controller.register(newUsername, newPassword);
                     if (created) {
-                        userId = controller.login(newUsername, newPassword).getId();
-                        System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);
+                        Users newUser = controller.login(newUsername, newPassword);
+                        if (newUser != null) {
+                            userId = newUser.getId();
+
+                            // Hesap ekle
+                            accountsService.createAccount(userId,0.0);
+
+                            System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);
+                        } else {
+                            System.out.println("Kayit sonrası login basarisiz!");
+                        }
                     } else {
                         System.out.println("Kayit basarisiz, kullanici adi alinmis olabilir.");
                     }
                     break;
+
 
                 case 3:
                     if (userId != -1) {
@@ -88,15 +100,29 @@ public class Main {
                 case 4:
                     if (userId != -1) {
                         System.out.print("Yatirmak istediginiz miktar: ");
-                        double amount = Double.parseDouble(scanner.nextLine());
+                        double amount;
+                        try {
+                            amount = Double.parseDouble(scanner.nextLine());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Gecersiz miktar!");
+                            break;
+                        }
+
                         if (controller.deposit(userId, amount)) System.out.println(amount + " TL yatirildi.");
-                    } else System.out.println("Lutfen giris yapin.");
+                    }else System.out.println("Lutfen giris yapin.");
                     break;
 
                 case 5:
                     if (userId != -1) {
                         System.out.print("Cekmek istediginiz miktar: ");
-                        double amount = Double.parseDouble(scanner.nextLine());
+                        double amount;
+                        try {
+                            amount = Double.parseDouble(scanner.nextLine());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Gecersiz miktar!");
+                            break;
+                        }
+
                         if (controller.withdraw(userId, amount)) System.out.println(amount + " TL cekildi.");
                         else System.out.println("Yetersiz bakiye!");
                     } else System.out.println("Lutfen giris yapin.");

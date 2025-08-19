@@ -21,12 +21,23 @@ public class TransactionsService {
 
     public void addTransaction(int userId, String type, double amount) {
         Accounts account = accountsRepository.getByUserId(userId);
-        Transactions transaction = new Transactions(0, account.getId(), type, amount, new Timestamp(System.currentTimeMillis()));
-        transactionsRepository.insert(transaction);
+        if (account != null) {
+            Transactions transaction = new Transactions(
+                    0,
+                    account.getId(),
+                    type,
+                    amount,
+                    new Timestamp(System.currentTimeMillis())
+            );
+            transactionsRepository.insert(transaction);
+        }
     }
 
     public List<Transactions> getTransactions(int userId) {
         Accounts account = accountsRepository.getByUserId(userId);
-        return transactionsRepository.getByAccountId(account.getId());
+        if (account != null) {
+            return transactionsRepository.getByAccountId(account.getId());
+        }
+        return List.of();
     }
 }

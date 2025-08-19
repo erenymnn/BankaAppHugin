@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.model.Accounts;
 import org.example.repository.AccountsRepository;
 
+import java.util.List;
+
 public class AccountsService {
 
     private final AccountsRepository accountsRepository;
@@ -17,18 +19,24 @@ public class AccountsService {
 
     public boolean deposit(int userId, double amount) {
         Accounts account = accountsRepository.getByUserId(userId);
+        if (account == null) return false;
         double newBalance = account.getBalance() + amount;
-        accountsRepository.updateBalance(userId, newBalance);
-        return false;
+        return accountsRepository.updateBalance(userId, newBalance);
     }
 
     public boolean withdraw(int userId, double amount) {
         Accounts account = accountsRepository.getByUserId(userId);
-        if (account.getBalance() >= amount) {
-            double newBalance = account.getBalance() - amount;
-            accountsRepository.updateBalance(userId, newBalance);
-            return true;
-        }
-        return false; // Yetersiz bakiye
+        if (account == null || account.getBalance() < amount) return false;
+        double newBalance = account.getBalance() - amount;
+        return accountsRepository.updateBalance(userId, newBalance);
+    }
+
+    public boolean createAccount(int userId, double initialBalance) {
+        Accounts account = new Accounts(0, userId, initialBalance);
+        return accountsRepository.insert(account);
+    }
+
+    public List<Accounts> getAllAccounts() {
+        return accountsRepository.getAll();
     }
 }

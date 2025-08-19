@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.List;
+
 public class Accounts {
     private int id;
     private int user_id;
