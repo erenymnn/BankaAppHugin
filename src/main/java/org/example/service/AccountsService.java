@@ -33,7 +33,7 @@ public class AccountsService {
 
     public boolean createAccount(int userId, double initialBalance) {
         Accounts account = new Accounts(0, userId, initialBalance);
-        return accountsRepository.insert(account);
+        return accountsRepository.newAccountsinsert(account);
     }
 
     public List<Accounts> getAllAccounts() {

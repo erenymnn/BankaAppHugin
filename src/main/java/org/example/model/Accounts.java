@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.util.List;
-
 public class Accounts {
     private int id;
     private int user_id;
@@ -25,15 +23,10 @@ public class Accounts {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+
 }

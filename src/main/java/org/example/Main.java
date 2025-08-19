@@ -76,7 +76,7 @@ public class Main {
                         if (newUser != null) {
                             userId = newUser.getId();
 
-                            // Hesap ekle
+                            // account add
                             accountsService.createAccount(userId,0.0);
 
                             System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);

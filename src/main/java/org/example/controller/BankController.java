@@ -25,7 +25,7 @@ public class BankController {
     public Users login(String username, String password) {
         return usersService.login(username, password);
     }
-
+ // new user
     public boolean register(String username, String password) {
         return usersService.register(username, password);
     }

@@ -39,7 +39,7 @@ public class AccountsRepository {
         }
     }
 
-    public boolean insert(Accounts account) {
+    public boolean newAccountsinsert(Accounts account) {
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "INSERT INTO accounts (user_id, balance) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {

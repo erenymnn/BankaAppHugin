@@ -41,7 +41,7 @@ public class TransactionsRepository {
 
 
 
-    // hesap kayıt ekleme
+   // add a new transaction (Transactions) to the database
     public boolean insert(Transactions transactions) {
             String sql = "INSERT INTO transactions (account_id, type, amount, created_at) VALUES (?, ?, ?, ?)";
 

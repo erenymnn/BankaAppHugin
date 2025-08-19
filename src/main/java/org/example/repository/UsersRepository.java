@@ -32,7 +32,7 @@ public class UsersRepository {
         return null;
 
     }
-
+    //add new user
     public boolean insert(Users user) {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
