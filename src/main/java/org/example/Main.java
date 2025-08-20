@@ -8,10 +8,13 @@ import org.example.repository.UsersRepository;
 import org.example.service.AccountsService;
 import org.example.service.TransactionsService;
 import org.example.service.UsersService;
+import org.example.utils.Xml;
 
 import java.util.Scanner;
 
 public class Main {
+
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -42,7 +45,9 @@ public class Main {
             System.out.println("4. Para Yatir");
             System.out.println("5. Para Cek");
             System.out.println("6. Islem Gecmisini Gor");
-            System.out.println("7. Cikis");
+            System.out.println("7. XML Olustur");
+            System.out.println("8. JSON Olustur");
+            System.out.println("9. Cikis");
             System.out.print("Seciminiz: ");
 
             int secim = Integer.parseInt(scanner.nextLine());
@@ -136,6 +141,13 @@ public class Main {
                     break;
 
                 case 7:
+                    Xml.createXML(controller, userId);
+                    break;
+
+                case 8:
+
+
+                case 9:
                     devam = false;
                     break;
 

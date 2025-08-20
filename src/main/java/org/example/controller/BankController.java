@@ -50,4 +50,11 @@ public class BankController {
     public List<Transactions> getTransactions(int userId) {
         return transactionsService.getTransactions(userId);
     }
+    public Users getUserById(int userId) {
+        return usersService.getUserById(userId);
+    }
+
+    public Accounts getAccount(int userId) {
+        return accountsService.getAccountByUserId(userId);
+    }
 }

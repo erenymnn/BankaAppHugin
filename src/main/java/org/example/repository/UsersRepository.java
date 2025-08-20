@@ -52,4 +52,26 @@ public class UsersRepository {
         }
     }
 
+    public Users getById(int userId) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    return new Users(id, username, password);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // kullanıcı bulunamazsa null döner
+    }
+
 }
