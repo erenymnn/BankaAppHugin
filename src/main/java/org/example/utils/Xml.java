@@ -77,7 +77,7 @@ public class Xml {
           StreamResult result=new StreamResult(new File(xmlFolder,"BankaAppHugin"+userId+".xml"));
           transformer.transform(source,result);
 
-          System.out.println("XML Dosyasi basariyla olusturuldu: XML/BankaAppHugin.xml");
+          System.out.println("XML Dosyasi basariyla olusturuldu: "+"XML/BankaAppHugin"+userId+".xml");
       }catch (ParserConfigurationException | TransformerException e){
           e.printStackTrace();
       }
