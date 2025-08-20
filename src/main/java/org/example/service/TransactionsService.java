@@ -14,7 +14,7 @@ public class TransactionsService {
     private final AccountsRepository accountsRepository;
 
     public TransactionsService(TransactionsRepository transactionsRepository,
-                               AccountsRepository accountsRepository) {
+        AccountsRepository accountsRepository) {
         this.transactionsRepository = transactionsRepository;
         this.accountsRepository = accountsRepository;
     }

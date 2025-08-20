@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TransactionsRepository {
 
-    // Belirli bir hesabın işlem geçmişini listelemek
+    // List the transaction history of a specific account
 
     public List<Transactions> getByAccountId(int accountId) {
         String sql = "SELECT * FROM transactions WHERE account_id = ?";

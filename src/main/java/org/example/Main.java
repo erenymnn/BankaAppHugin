@@ -16,17 +16,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Repository'leri oluşturduk
+        // Creat Repository
         UsersRepository usersRepo = new UsersRepository();
         AccountsRepository accountsRepo = new AccountsRepository();
         TransactionsRepository transactionsRepo = new TransactionsRepository();
 
-        // Servisleri usersrepoya bagladık
+        //  Services connected to usersrepository
         UsersService usersService = new UsersService(usersRepo);
         AccountsService accountsService = new AccountsService(accountsRepo);
         TransactionsService transactionsService = new TransactionsService(transactionsRepo, accountsRepo);
 
-        // Controlleri servislere bağladık
+        // Controller connected to services
         BankController controller = new BankController(usersService, accountsService, transactionsService);
 
         int userId = -1;
@@ -46,8 +46,6 @@ public class Main {
             System.out.print("Seciminiz: ");
 
             int secim = Integer.parseInt(scanner.nextLine());
-
-
 
             switch (secim) {
                 case 1:
@@ -77,7 +75,7 @@ public class Main {
                             userId = newUser.getId();
 
                             // account add
-                            accountsService.createAccount(userId,0.0);
+                            accountsService.createAccount(userId, 0.0);
 
                             System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);
                         } else {
@@ -109,7 +107,7 @@ public class Main {
                         }
 
                         if (controller.deposit(userId, amount)) System.out.println(amount + " TL yatirildi.");
-                    }else System.out.println("Lutfen giris yapin.");
+                    } else System.out.println("Lutfen giris yapin.");
                     break;
 
                 case 5:

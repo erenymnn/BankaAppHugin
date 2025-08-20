@@ -11,16 +11,16 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
-    // Kullanıcı kaydı
+    // user registration
     public boolean register(String username, String password) {
         if (usersRepository.getByUsername(username) != null) {
-            return false; // kullanıcı zaten var
+            return false; //user already exists
         }
         Users user = new Users(0, username, password);
         return usersRepository.insert(user);
     }
 
-    // Giriş
+    //entrance
     public Users login(String username, String password) {
         Users user = usersRepository.getByUsername(username);
         if (user != null && user.getPassword().equals(password)) {

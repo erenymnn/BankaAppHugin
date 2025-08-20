@@ -17,7 +17,7 @@ public class UsersRepository {
         try(Connection conn = DataBaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
               stmt.setString(1, username);
-            try (ResultSet rs = stmt.executeQuery()) {  // sorguları calıştırır.
+            try (ResultSet rs = stmt.executeQuery()) {  // runs queries.
                 if (rs.next()) {
                     int id = rs.getInt("id");
                     String uname = rs.getString("username");
@@ -39,11 +39,11 @@ public class UsersRepository {
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, user.getUsername()); // kullanıcı adını set et
-            stmt.setString(2, user.getPassword()); // şifreyi set et
+            stmt.setString(1, user.getUsername()); // set username
+            stmt.setString(2, user.getPassword()); // set password
 
-            int rowsAffected = stmt.executeUpdate(); // sorguyu çalıştır
-            return rowsAffected > 0;  // başarılıysa true döndür
+            int rowsAffected = stmt.executeUpdate();  // run query
+            return rowsAffected > 0;  // return true if successful
 
 
         }catch (SQLException e){
