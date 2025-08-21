@@ -40,28 +40,27 @@ public class TransactionsRepository {
     }
 
 
+    // add a new transaction (Transactions) to the database
+    public boolean Transactionsinsert(Transactions transactions) {
+        String sql = "INSERT INTO transactions (account_id, type, amount, created_at) VALUES (?, ?, ?, ?)";
 
-   // add a new transaction (Transactions) to the database
-    public boolean insert(Transactions transactions) {
-            String sql = "INSERT INTO transactions (account_id, type, amount, created_at) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            try (Connection conn = DataBaseConnection.getConnection();
-                 PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, transactions.getAccount_id());
+            ps.setString(2, transactions.getType());
+            ps.setDouble(3, transactions.getAmount());
+            ps.setTimestamp(4, transactions.getCreatedAt());
 
-                ps.setInt(1, transactions.getAccount_id());
-                ps.setString(2, transactions.getType());
-                ps.setDouble(3, transactions.getAmount());
-                ps.setTimestamp(4, transactions.getCreatedAt());
+            int rowsInserted = ps.executeUpdate();
+            return rowsInserted > 0;
 
-                int rowsInserted = ps.executeUpdate();
-                return rowsInserted > 0;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
-
     }
+
+}
 
 

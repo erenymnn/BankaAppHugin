@@ -1,19 +1,24 @@
 package org.example.controller;
 
-import org.example.model.Accounts;
-import org.example.model.Transactions;
-import org.example.model.Users;
-import org.example.service.AccountsService;
-import org.example.service.TransactionsService;
-import org.example.service.UsersService;
-
+import org.example.model.*;
+import org.example.service.*;
 import java.util.List;
+//saat 14:10
 
 public class BankController {
 
     private final UsersService usersService;
     private final AccountsService accountsService;
     private final TransactionsService transactionsService;
+
+
+    public UsersService getUsersService() {
+        return usersService;
+    }
+
+    public AccountsService getAccountsService() {
+        return accountsService;
+    }
 
     public BankController(UsersService usersService, AccountsService accountsService,
                           TransactionsService transactionsService) {
@@ -25,7 +30,8 @@ public class BankController {
     public Users login(String username, String password) {
         return usersService.login(username, password);
     }
- // new user
+
+    // new user
     public boolean register(String username, String password) {
         return usersService.register(username, password);
     }
@@ -50,6 +56,7 @@ public class BankController {
     public List<Transactions> getTransactions(int userId) {
         return transactionsService.getTransactions(userId);
     }
+
     public Users getUserById(int userId) {
         return usersService.getUserById(userId);
     }

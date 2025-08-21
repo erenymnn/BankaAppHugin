@@ -16,6 +16,7 @@ public class Transactions {
         this.amount = amount;
         this.createdAt = createdAt;
     }
+
     public int getAccount_id() {
         return account_id;
     }

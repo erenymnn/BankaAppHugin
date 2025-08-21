@@ -1,9 +1,6 @@
 package org.example.service;
-
 import org.example.model.Accounts;
 import org.example.repository.AccountsRepository;
-
-import java.util.List;
 
 public class AccountsService {
 
@@ -12,7 +9,8 @@ public class AccountsService {
     public AccountsService(AccountsRepository accountsRepository) {
         this.accountsRepository = accountsRepository;
     }
-// sending a request
+
+    // sending a request
     public Accounts getAccountByUserId(int userId) {
         return accountsRepository.getByUserId(userId);
     }
@@ -36,9 +34,8 @@ public class AccountsService {
         return accountsRepository.newAccountsinsert(account);
     }
 
-    public List<Accounts> getAll() {
-        return accountsRepository.getAll();
-    }
+
+
 
 
 }

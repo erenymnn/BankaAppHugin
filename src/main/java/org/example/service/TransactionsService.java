@@ -14,7 +14,7 @@ public class TransactionsService {
     private final AccountsRepository accountsRepository;
 
     public TransactionsService(TransactionsRepository transactionsRepository,
-        AccountsRepository accountsRepository) {
+                               AccountsRepository accountsRepository) {
         this.transactionsRepository = transactionsRepository;
         this.accountsRepository = accountsRepository;
     }
@@ -29,7 +29,7 @@ public class TransactionsService {
                     amount,
                     new Timestamp(System.currentTimeMillis())
             );
-            transactionsRepository.insert(transaction);
+            transactionsRepository.Transactionsinsert(transaction);
         }
     }
 

@@ -14,9 +14,9 @@ public class UsersRepository {
     public Users getByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
 
-        try(Connection conn = DataBaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-              stmt.setString(1, username);
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {  // runs queries.
                 if (rs.next()) {
                     int id = rs.getInt("id");
@@ -26,12 +26,13 @@ public class UsersRepository {
                     return new Users(id, uname, password);
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
 
     }
+
     //add new user
     public boolean insert(Users user) {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -46,7 +47,7 @@ public class UsersRepository {
             return rowsAffected > 0;  // return true if successful
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

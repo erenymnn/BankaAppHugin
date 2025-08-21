@@ -28,6 +28,7 @@ public class UsersService {
         }
         return null;
     }
+
     public Users getUserById(int userId) {
         return usersRepository.getById(userId); // UsersRepository içinde getById olmalı
     }

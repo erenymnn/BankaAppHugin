@@ -1,14 +1,9 @@
 package org.example;
-
 import org.example.controller.BankController;
 import org.example.model.Users;
-import org.example.repository.AccountsRepository;
-import org.example.repository.TransactionsRepository;
-import org.example.repository.UsersRepository;
-import org.example.service.AccountsService;
-import org.example.service.TransactionsService;
-import org.example.service.UsersService;
-import org.example.utils.Xml;
+import org.example.repository.*;
+import org.example.service.*;
+import org.example.utils.*;
 
 import java.util.Scanner;
 
@@ -17,17 +12,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Creat Repository
         UsersRepository usersRepo = new UsersRepository();
         AccountsRepository accountsRepo = new AccountsRepository();
         TransactionsRepository transactionsRepo = new TransactionsRepository();
 
-        //  Services connected to usersrepository
+
         UsersService usersService = new UsersService(usersRepo);
         AccountsService accountsService = new AccountsService(accountsRepo);
         TransactionsService transactionsService = new TransactionsService(transactionsRepo, accountsRepo);
 
-        // Controller connected to services
         BankController controller = new BankController(usersService, accountsService, transactionsService);
 
         int userId = -1;
@@ -70,25 +63,28 @@ public class Main {
                     String newUsername = scanner.nextLine();
                     System.out.print("Yeni sifre: ");
                     String newPassword = scanner.nextLine();
+                    if (newUsername.length()<10 && newPassword.length()<10 && newUsername.length()>0 && newPassword.length()>0) {
+                        boolean created = controller.register(newUsername, newPassword);
+                        if (created) {
+                            Users newUser = controller.login(newUsername, newPassword);
+                            if (newUser != null) {
+                                userId = newUser.getId();
 
-                    boolean created = controller.register(newUsername, newPassword);
-                    if (created) {
-                        Users newUser = controller.login(newUsername, newPassword);
-                        if (newUser != null) {
-                            userId = newUser.getId();
+                                // account add
+                                accountsService.createAccount(userId, 0.0);
 
-                            // account add
-                            accountsService.createAccount(userId, 0.0);
-
-                            System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);
+                                System.out.println("Kayit basarili! Hosgeldiniz " + newUsername);
+                            } else {
+                                System.out.println("Kayit sonrası login basarisiz!");
+                            }
                         } else {
-                            System.out.println("Kayit sonrası login basarisiz!");
+                            System.out.println("Kayit basarisiz, kullanici adi alinmis olabilir.");
                         }
-                    } else {
-                        System.out.println("Kayit basarisiz, kullanici adi alinmis olabilir.");
+
+                    }else {
+                        System.out.println("Lutfen 1 ile 10 arasi karakter kullaniniz.{Kullanici adi ve Sifre}");
                     }
                     break;
-
 
                 case 3:
                     if (userId != -1) {
@@ -143,7 +139,8 @@ public class Main {
                     break;
 
                 case 8:
-
+                    Json.createJSON(controller, userId);
+                    break;
 
                 case 9:
                     devam = false;

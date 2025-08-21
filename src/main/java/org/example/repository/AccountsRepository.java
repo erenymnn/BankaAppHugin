@@ -57,17 +57,7 @@ public class AccountsRepository {
         return false;
     }
 
-    public List<Accounts> getAll() {
-        List<Accounts> list = new ArrayList<>();
-        try (Connection conn = DataBaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM accounts");
-            while (rs.next()) {
-                list.add(new Accounts(rs.getInt("id"), rs.getInt("user_id"), rs.getDouble("balance")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+
+
+
 }
